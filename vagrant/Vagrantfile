@@ -6,7 +6,11 @@
 NUM_MASTER_NODE = 2
 NUM_WORKER_NODE = 2
 
-IP_NW = "192.168.5."
+# VirtualBox - 6.1.30 r148432
+# Vagrant - 2.2.19
+# IP should be starting from 192.168.56.* for Vagrant 2.2.18 and above
+# https://discuss.hashicorp.com/t/vagrant-2-2-18-osx-11-6-cannot-create-private-network/30984
+IP_NW = "192.168.56."
 MASTER_IP_START = 10
 NODE_IP_START = 20
 LB_IP_START = 30

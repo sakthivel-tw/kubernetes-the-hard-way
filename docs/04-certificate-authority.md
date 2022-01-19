@@ -118,7 +118,6 @@ kube-proxy.crt
 Generate the `kube-scheduler` client certificate and private key:
 
 
-
 ```
 openssl genrsa -out kube-scheduler.key 2048
 openssl req -new -key kube-scheduler.key -subj "/CN=system:kube-scheduler" -out kube-scheduler.csr
@@ -154,9 +153,9 @@ DNS.2 = kubernetes.default
 DNS.3 = kubernetes.default.svc
 DNS.4 = kubernetes.default.svc.cluster.local
 IP.1 = 10.96.0.1
-IP.2 = 192.168.5.11
-IP.3 = 192.168.5.12
-IP.4 = 192.168.5.30
+IP.2 = 192.168.56.11
+IP.3 = 192.168.56.12
+IP.4 = 192.168.56.30
 IP.5 = 127.0.0.1
 EOF
 ```
@@ -193,8 +192,8 @@ basicConstraints = CA:FALSE
 keyUsage = nonRepudiation, digitalSignature, keyEncipherment
 subjectAltName = @alt_names
 [alt_names]
-IP.1 = 192.168.5.11
-IP.2 = 192.168.5.12
+IP.1 = 192.168.56.11
+IP.2 = 192.168.56.12
 IP.3 = 127.0.0.1
 EOF
 ```
@@ -216,7 +215,7 @@ etcd-server.crt
 
 ## The Service Account Key Pair
 
-The Kubernetes Controller Manager leverages a key pair to generate and sign service account tokens as describe in the [managing service accounts](https://kubernetes.io/docs/admin/service-accounts-admin/) documentation.
+The Kubernetes Controller Manager leverages a key pair to generate and sign service account tokens as described in the [managing service accounts](https://kubernetes.io/docs/admin/service-accounts-admin/) documentation.
 
 Generate the `service-account` certificate and private key:
 
@@ -239,7 +238,7 @@ service-account.crt
 Copy the appropriate certificates and private keys to each controller instance:
 
 ```
-for instance in master-1 master-2; do
+for instance in master-2; do
   scp ca.crt ca.key kube-apiserver.key kube-apiserver.crt \
     service-account.key service-account.crt \
     etcd-server.key etcd-server.crt \
